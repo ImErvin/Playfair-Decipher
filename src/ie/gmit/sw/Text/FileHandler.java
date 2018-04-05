@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.Text;
 
 import java.io.*;
 
@@ -21,7 +21,8 @@ public class FileHandler {
 			while((line = br.readLine()) != null) {
                 System.out.println(line);
             }   
-
+			
+			return line;
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		} catch (IOException e) {
