@@ -4,10 +4,10 @@ import java.util.*;
 
 // Adapted from https://gist.github.com/tahaemara/473702df72163773d8393d93428c4b6b
 public class Cypher {
-	private String[] digrams;
+	private String[] diagraphs;
 	private String alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
 	public Cypher(String text) {
-		this.digrams = this.digramify(this.formatify(text));
+		this.diagraphs = this.diagraphify(this.formatify(text));
 	}
 	
 	public String generateMatrix(String key) {
@@ -16,7 +16,7 @@ public class Cypher {
         StringBuilder mat = new StringBuilder();
         Set set = new LinkedHashSet();
 
-        for (char chr : matrixstring.toLowerCase().toCharArray()) {
+        for (char chr : matrixstring.toUpperCase().toCharArray()) {
             set.add(chr);
         }
         for (Object chr : set) {
@@ -26,16 +26,16 @@ public class Cypher {
         return mat.toString();
     }
 	
-	public String[] digramify(String text){
-		String digrams[] = new String[text.length() / 2];
+	public String[] diagraphify(String text){
+		String diagraphs[] = new String[text.length() / 2];
 		
 		int j = 0;
 		for(int i = 0; i < text.length(); i += 2){
-			digrams[j] = text.substring(i, i + 2);
+			diagraphs[j] = text.substring(i, i + 2);
 	        j++;
 		}
 		
-		return digrams;
+		return diagraphs;
 	}
 	
 	public String formatify(String text){
@@ -54,15 +54,14 @@ public class Cypher {
 		return sb.toString();
 	}
 	
-	public String decrypt(String[] digrams, String matrix) {
+	public String decrypt(String[] diagraphs, String matrix) {
 
         StringBuilder ciphertex = new StringBuilder();
-        matrix = matrix.toUpperCase();
-        for (String digram : digrams) {//using zero index
-            int row1 = matrix.indexOf(digram.charAt(0)) / 5;
-            int col1 = matrix.indexOf(digram.charAt(0)) % 5;
-            int row2 = matrix.indexOf(digram.charAt(1)) / 5;
-            int col2 = matrix.indexOf(digram.charAt(1)) % 5;
+        for (String diagraph : diagraphs) {//using zero index
+            int row1 = matrix.indexOf(diagraph.charAt(0)) / 5;
+            int col1 = matrix.indexOf(diagraph.charAt(0)) % 5;
+            int row2 = matrix.indexOf(diagraph.charAt(1)) / 5;
+            int col2 = matrix.indexOf(diagraph.charAt(1)) % 5;
             
             char chr1;
             char chr2;
@@ -85,13 +84,13 @@ public class Cypher {
     }
     
 	
-	public String[] getDigrams(){
-		return this.digrams;
+	public String[] getDiagraphs(){
+		return this.diagraphs;
 	}
 	
 	
 	public static void main(String[] args) {
-		Cypher c = new Cypher("This is a test for digramst");
+		Cypher c = new Cypher("This is a test for diagraphst");
 		String key = "a";
 		
 		String matrix = c.generateMatrix(key);
@@ -103,6 +102,6 @@ public class Cypher {
             System.out.print(chrs[i]);
         }
 		
-		System.out.println(c.decrypt(c.getDigrams(), matrix));
+		System.out.println(c.decrypt(c.getDiagraphs(), matrix));
 	}
 }
