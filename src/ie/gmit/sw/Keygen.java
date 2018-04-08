@@ -1,5 +1,6 @@
 package ie.gmit.sw;
 
+import java.security.SecureRandom;
 import java.util.*;
 
 public class Keygen {
@@ -7,10 +8,10 @@ public class Keygen {
 	private Random random;
 	
 	public Keygen() {
-		this.random = new Random();
+		this.random = new SecureRandom();
 	}
 	
-	public String generateMatrix() {
+	public String generateKey() {
 		String matrixstring = ALPHABET;
 		StringBuilder mat = new StringBuilder();
 		List<Character> list = new ArrayList<Character>();
@@ -30,13 +31,30 @@ public class Keygen {
 	
 	public String generateKey(String secretkey){
 		String key = secretkey.toUpperCase().replace("J", "I") + ALPHABET;
+		key = duplicateChecker(key);
+		return key;
+	}
+	
+	// Ripped from https://stackoverflow.com/questions/4989091/removing-duplicates-from-a-string-in-java
+	public String duplicateChecker(String key){
+		
+		char[] chars = key.toCharArray();
+		Set<Character> charSet = new LinkedHashSet<Character>();
+		for (char c : chars) {
+		    charSet.add(c);
+		}
 
-		return key.replaceAll("(.)\\1", "$1");
+		StringBuilder sb = new StringBuilder();
+		for (Character character : charSet) {
+		    sb.append(character);
+		}
+		
+		return sb.toString();
 	}
 	
 	public static void main(String[] args) {
 		Keygen k = new Keygen();
 		
-		
+		System.err.println(k.generateKey("AABBEEEBSBqwJJqweqweaeweqweqweqweqweqweqweEEII"));
 	}
 }
