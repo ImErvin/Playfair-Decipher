@@ -1,10 +1,10 @@
 package ie.gmit.sw.Text;
 
 public class Digrapherator {
+	private String[] digraphs;
 	
-	
-	public Digrapherator() {
-		// TODO Auto-generated constructor stub
+	public Digrapherator(String text) {
+		this.digraphs = this.diagraphify(this.formatify(text));
 	}
 	
 	public String[] diagraphify(String text){
@@ -35,7 +35,7 @@ public class Digrapherator {
 		return sb.toString();
 	}
 	
-	public String[] turnDigraphs(String text){
-		return this.diagraphify(this.formatify(text));
+	public String[] getDiagraphs(){
+		return this.digraphs;
 	}
 }

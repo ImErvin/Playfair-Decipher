@@ -15,14 +15,15 @@ public class FileHandler {
 	public String readFile() {
 		try {
 			String line = null;
+			String text = "";
 			this.fr = new FileReader(this.fileName);
 			this.br = new BufferedReader(this.fr);
 			
 			while((line = br.readLine()) != null) {
-                System.out.println(line);
+				text += line;
             }   
 			
-			return line;
+			return text;
 		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		} catch (IOException e) {
@@ -34,8 +35,13 @@ public class FileHandler {
 	
 	public static void main(String[] args) {
 		FileHandler f = new FileHandler("./tips.txt");
+		Digrapherator d = new Digrapherator(f.readFile());
 		
-		f.readFile();
+		for(String i : d.getDiagraphs())
+		{
+			System.out.println(i);
+		}
+		System.err.println(d.getDiagraphs());
 	}
 
 }
