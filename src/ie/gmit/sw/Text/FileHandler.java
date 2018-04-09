@@ -41,7 +41,6 @@ public class FileHandler {
 		{
 			System.out.println(i);
 		}
-		System.err.println(d.getDiagraphs());
 	}
 
 }

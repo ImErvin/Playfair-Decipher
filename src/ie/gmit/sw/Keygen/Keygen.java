@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.Keygen;
 
 import java.security.SecureRandom;
 import java.util.*;
