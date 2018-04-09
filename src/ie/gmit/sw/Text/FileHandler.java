@@ -31,5 +31,11 @@ public class FileHandler {
 
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		FileHandler f = new FileHandler("./tips.txt");
+		
+		f.readFile();
+	}
 
 }
