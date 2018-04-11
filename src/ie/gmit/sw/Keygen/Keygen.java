@@ -29,12 +29,7 @@ public class Keygen {
 		return mat.toString();
 	}
 	
-	public String generateKey(String secretkey){
-		String key = secretkey.toUpperCase().replace("J", "I") + ALPHABET;
-		key = duplicateChecker(key);
-		return key;
-	}
-	
+
 	// Ripped from https://stackoverflow.com/questions/4989091/removing-duplicates-from-a-string-in-java
 	public String duplicateChecker(String key){
 		
@@ -55,6 +50,6 @@ public class Keygen {
 	public static void main(String[] args) {
 		Keygen k = new Keygen();
 		
-		System.err.println(k.generateKey("AABBEEEBSBqwJJqweqweaeweqweqweqweqweqweqweEEII"));
+		System.err.println(k.generateKey());
 	}
 }
