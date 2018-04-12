@@ -96,6 +96,26 @@ public class Shuffler {
 		return new String(chs);
 	}
 	
+	public String reverseRows(String key){
+		StringBuilder sb = new StringBuilder();
+		String editedKey = key;
+		
+		for(int i = 0; i < 5; i++){
+			sb.append(new StringBuilder(editedKey.substring(0, 5)).reverse());
+			editedKey = editedKey.substring(5, editedKey.length());
+		}
+		
+		return sb.toString();
+	}
+	
+	public String reverseCols(){
+		
+		
+		
+		return null;
+	}
+	
+	
 	public static void main(String[] args) {
 		Shuffler s = new Shuffler();
 		String key = "NKLTHYDBQXSWIMEFUPZCARGOV";
@@ -104,5 +124,6 @@ public class Shuffler {
 		s.reverse(key);
 		s.swapRows(key);
 		s.swapCols(key);
+		s.reverseRows(key);
 	}
 }
