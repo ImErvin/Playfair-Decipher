@@ -96,6 +96,7 @@ public class Shuffler {
 		return new String(chs);
 	}
 	
+	
 	public String reverseRows(String key){
 		StringBuilder sb = new StringBuilder();
 		String editedKey = key;
@@ -104,15 +105,21 @@ public class Shuffler {
 			sb.append(new StringBuilder(editedKey.substring(0, 5)).reverse());
 			editedKey = editedKey.substring(5, editedKey.length());
 		}
+			
 		
 		return sb.toString();
 	}
 	
-	public String reverseCols(){
+	public String reverseCols(String key){
+		StringBuilder sb = new StringBuilder();
+		String editedKey = key;
 		
-		
-		
-		return null;
+		for(int i = 0; i < 5; i++){
+			sb.append(new StringBuilder(editedKey.substring(editedKey.length() - 5, editedKey.length())));
+			editedKey = editedKey.substring(0, editedKey.length() - 5);
+		}
+
+		return sb.toString();
 	}
 	
 	
@@ -125,5 +132,6 @@ public class Shuffler {
 		s.swapRows(key);
 		s.swapCols(key);
 		s.reverseRows(key);
+		s.reverseCols(key);
 	}
 }
