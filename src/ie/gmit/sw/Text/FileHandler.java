@@ -23,6 +23,8 @@ public class FileHandler {
 				text += line;
             }   
 			
+			fr.close();
+			br.close();
 			return text;
 		} catch (FileNotFoundException e) {
 			System.out.println(e);

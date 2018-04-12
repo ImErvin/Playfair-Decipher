@@ -7,9 +7,8 @@ public class Playfair {
 	}
 	
 	public String decrypt(String[] digraphs, String key) {
-
         StringBuilder ciphertex = new StringBuilder();
-        for (String diagraph : digraphs) {//using zero index
+        for (String diagraph : digraphs) {
             int row1 = key.indexOf(diagraph.charAt(0)) / 5;
             int col1 = key.indexOf(diagraph.charAt(0)) % 5;
             int row2 = key.indexOf(diagraph.charAt(1)) / 5;

@@ -6,9 +6,14 @@ import java.util.*;
 public class Keygen {
 	private final String ALPHABET = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
 	private Random random;
+	private static Keygen instance;
 	
-	public Keygen() {
+	private Keygen() {
 		this.random = new SecureRandom();
+	}
+	
+	public static Keygen getInstance() {
+		return (instance == null) ? new Keygen() : instance;
 	}
 	
 	public String generateKey() {
