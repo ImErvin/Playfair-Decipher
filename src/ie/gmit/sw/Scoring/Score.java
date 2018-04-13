@@ -47,9 +47,7 @@ public class Score {
 	public double scoreProb(String decryptedText){
 		int range = decryptedText.length() <= 800 ? decryptedText.length() - 4 : 800 - 4;
 		double score = 0;
-		
-		System.out.println(range);
-		
+				
 		for(int i = 0; i < range; i++){
 			if(this.fourgrams.get(decryptedText.substring(i, i + 4)) != null){
 				score += Math.log10((double) this.fourgrams.get(decryptedText.substring(i, i + 4)) / this.total);

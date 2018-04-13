@@ -16,26 +16,20 @@ public class Shuffler {
 		switch(percentile){
 			case 0:
 			case 9:
-				System.out.println("Reverse");
 				return reverse(key);
 			case 1:
 			case 8:
-				System.out.println("SwapRows");
 				return swapRows(key);
 			case 2:
 			case 7:
-				System.out.println("SwapCols");
 				return swapCols(key);
 			case 3:
 			case 6:
-				System.out.println("Reverse rows");
 				return reverseRows(key);
 			case 4:
 			case 5:
-				System.out.println("Reverse cols");
 				return reverseCols(key);
 			default:
-				System.out.println("Swap chars");
 				return swapChars(key);
 			
 		}
@@ -51,8 +45,8 @@ public class Shuffler {
 		}while(index1 == index2);
 				
 		chs = replace(chs, index1, index2);	
-		
-		return chs.toString();
+				
+		return new String(chs);
 	}
 	
 	public String reverse(String key){
