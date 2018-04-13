@@ -18,17 +18,17 @@ public class SimulatedAnnealing {
 	private Digrapherator dg;
 	private Random random;
 	
-	public SimulatedAnnealing(){
+	public SimulatedAnnealing(String filename){
 		this.pf = new Playfair();
 		this.s = new Score();
 		this.kg = Keygen.getInstance();
 		this.sh = new Shuffler();
-		this.fh = new FileHandler("./hobbit.txt");
+		this.fh = new FileHandler(filename);
 		this.dg = new Digrapherator(this.fh.readFile());
 		this.random = new SecureRandom();
 	}
 	
-	public void startSimulation(){
+	public String startSimulation(){
 		String parent = this.kg.generateKey();
 		String decipheredText = this.pf.decrypt(this.dg.getDiagraphs(), parent);
 		double parentLog = this.s.scoreProb(decipheredText);
@@ -38,6 +38,8 @@ public class SimulatedAnnealing {
 		double childLog;
 		String mostEnglish = "";
 		double bestLog = parentLog;
+		
+		System.out.println("DECRYPTING.. PLEASE WAIT");
 		
 		for(temp = 20; temp >= 0; temp--){
 			for(transition = 50000; transition >= 0; transition--){
@@ -60,18 +62,24 @@ public class SimulatedAnnealing {
 				if(parentLog > bestLog){
 					bestLog = parentLog;
 					mostEnglish = decipheredText;
-					System.out.println("\nMost English: " + mostEnglish);
 				}
+				
+				
+			}
+			
+			if(parentLog == bestLog){
+				break;
 			}
 		}
 		
-		System.out.println("Done Key: " + parent );
+		return "Done\n-------------------\nBest Key: " + parent + "\nOutput: " + mostEnglish;
+
 	}
 	
 	public static void main(String[] args) {
-		SimulatedAnnealing sa = new SimulatedAnnealing();
+		//SimulatedAnnealing sa = new SimulatedAnnealing();
 		
-		sa.startSimulation();
+		//sa.startSimulation();
 	}
 
 }

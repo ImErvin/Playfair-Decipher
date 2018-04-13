@@ -51,10 +51,4 @@ public class Keygen {
 		
 		return sb.toString();
 	}
-	
-	public static void main(String[] args) {
-		Keygen k = new Keygen();
-		
-		System.err.println(k.generateKey());
-	}
 }

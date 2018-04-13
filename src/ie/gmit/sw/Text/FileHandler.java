@@ -8,6 +8,10 @@ public class FileHandler {
 	private FileReader fr;
 	private BufferedReader br;
 
+	public FileHandler() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public FileHandler(String fileName) {
 		this.fileName = fileName;
 	}
@@ -18,11 +22,11 @@ public class FileHandler {
 			String text = "";
 			this.fr = new FileReader(this.fileName);
 			this.br = new BufferedReader(this.fr);
-			
-			while((line = br.readLine()) != null) {
+
+			while ((line = br.readLine()) != null) {
 				text += line;
-            }   
-			
+			}
+
 			fr.close();
 			br.close();
 			return text;
@@ -34,15 +38,23 @@ public class FileHandler {
 
 		return null;
 	}
-	
-	public static void main(String[] args) {
-		FileHandler f = new FileHandler("./tips.txt");
-		Digrapherator d = new Digrapherator(f.readFile());
-		
-		for(String i : d.getDiagraphs())
-		{
-			System.out.println(i);
+
+	public String writeFile(String filename, String content) {
+		try {
+			String file = "./annealed-" + filename;
+			FileWriter fw = new FileWriter(file);
+			fw.write(content);
+			fw.close();
+
+			return "Saved as " + file;
+		} catch (FileNotFoundException e) {
+			// File not found
+			e.printStackTrace();
+			return "error";
+		} catch (IOException e) {
+			// Error when writing to the file
+			e.printStackTrace();
+			return "error";
 		}
 	}
-
 }
