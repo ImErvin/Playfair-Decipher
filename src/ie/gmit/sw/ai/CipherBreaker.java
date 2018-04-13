@@ -7,7 +7,7 @@ import ie.gmit.sw.ai.Menu.UserMenu;
  * @author Ervin Mamutov | github.com/imervin
  *
  */
-public class Runner {
+public class CipherBreaker {
 	public static void main(String[] args) {
 		UserMenu um = new UserMenu();
 
