@@ -1,21 +1,42 @@
-package ie.gmit.sw.Text;
+package ie.gmit.sw.ai.Text;
 
 import java.io.*;
 
+/**
+ * Class that handles file reading and writing.
+ * 
+ * 
+ * @author Ervin Mamutov | github.com/imervin
+ *
+ */
 public class FileHandler {
 
 	private String fileName;
 	private FileReader fr;
 	private BufferedReader br;
 
+	/**
+	 * Default constructor
+	 */
 	public FileHandler() {
-		// TODO Auto-generated constructor stub
+
 	}
-	
+
+	/**
+	 * String constructor that sets filename
+	 * 
+	 * @param fileName
+	 */
 	public FileHandler(String fileName) {
 		this.fileName = fileName;
 	}
 
+	/**
+	 * Reads the file using the member filename variable parses what is inside
+	 * using a filereader and a bufferedreader.
+	 * 
+	 * @return The contents of a file in string format.
+	 */
 	public String readFile() {
 		try {
 			String line = null;
@@ -39,6 +60,16 @@ public class FileHandler {
 		return null;
 	}
 
+	/**
+	 * Will write the output of the SA algorithm to a file.
+	 * 
+	 * @param filename
+	 *            A unique filename to source the content to
+	 * @param content
+	 *            The response of the SA algorithm to be written into a file
+	 * @return An error or success message to be shown to the user in the
+	 *         console
+	 */
 	public String writeFile(String filename, String content) {
 		try {
 			String file = "./annealed-" + filename;

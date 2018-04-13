@@ -1,47 +1,67 @@
-package ie.gmit.sw.Menu;
+package ie.gmit.sw.ai.Menu;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import ie.gmit.sw.Scoring.SimulatedAnnealing;
-import ie.gmit.sw.Text.FileHandler;
+import ie.gmit.sw.ai.Scoring.SimulatedAnnealing;
+import ie.gmit.sw.ai.Text.FileHandler;
 
+/**
+ * Class that represents a console UI for the user to work with the program.
+ * 
+ * @author Ervin Mamutov | github.com/imervin
+ *
+ */
 public class UserMenu {
+	// Scanner to get input
 	private Scanner console;
-	private int userOption;
 
+	/**
+	 * Default constructor instantiates a scanner with system.in
+	 */
 	public UserMenu() {
 		this.console = new Scanner(System.in);
 	}
 
-	public void displayFiles(String path){
-		Arrays.stream(new File(path).listFiles())
-		.map(file -> file.getName())
-		.forEach(i -> System.out.println(i));	
+	/**
+	 * Will display all the files at provided path using a Stream with a map
+	 * function.
+	 * 
+	 * @param path
+	 *            The path to directory to be searched for files.
+	 */
+	public void displayFiles(String path) {
+		Arrays.stream(new File(path).listFiles()).map(file -> file.getName()).forEach(i -> System.out.println(i));
 	}
-	
-	public void getFile(String path){
+
+	/**
+	 * A sub-menu of the user-menu used to initiate annealing upon user consent.
+	 * 
+	 * @param path
+	 *            The path to the file to be decrypted
+	 */
+	public void getFile(String path) {
 		boolean control = true;
-		try{
+		try {
 			SimulatedAnnealing sm = new SimulatedAnnealing(path);
-			do{
+			do {
 				System.out.println("Successfully read file do you want to continue to start decryping?");
 				System.out.println("[1] Yes");
 				System.out.println("[2] No");
 				System.out.print("\nInput: ");
-				switch(console.nextInt()){
+				switch (console.nextInt()) {
 				case 1:
 					boolean control1 = true;
 					String output = sm.startSimulation();
 					System.out.println(output + "\n");
 					System.out.println("Do you want to save this record?");
-					do{
+					do {
 						System.out.println("[1] Yes");
 						System.out.println("[2] No");
 						System.out.print("\nInput: ");
-					
-						switch(console.nextInt()){
+
+						switch (console.nextInt()) {
 						case 1:
 							FileHandler fh = new FileHandler();
 							String written = fh.writeFile(path, output);
@@ -56,8 +76,8 @@ public class UserMenu {
 							System.out.println("Woops! that option is not on the menu - try again.");
 							break;
 						}
-					}while(control1);
-					
+					} while (control1);
+
 				case 2:
 					control = false;
 					break;
@@ -65,9 +85,9 @@ public class UserMenu {
 					System.out.println("Woops! that option is not on the menu - try again.");
 					break;
 				}
-			}while(control);
-			
-		}catch(Exception err){
+			} while (control);
+
+		} catch (Exception err) {
 			System.out.println("Could not find that directory");
 		}
 	}
@@ -85,16 +105,19 @@ public class UserMenu {
 		System.out.println("[0] Exit.");
 		System.out.print("\nInput: ");
 	}
-	
-	public void optionOne(){
+
+	/**
+	 * A submenu for the user menu that handles the file search.
+	 */
+	public void optionOne() {
 		boolean control = true;
-		do{
+		do {
 			System.out.println("\nView Files:");
 			System.out.println("[1] Current Directory");
 			System.out.println("[2] Absolute Path");
 			System.out.println("[0] Back");
 			System.out.print("\nInput: ");
-			switch(userOption()){
+			switch (userOption()) {
 			case 1:
 				displayFiles(".");
 				break;
@@ -102,9 +125,9 @@ public class UserMenu {
 				System.out.println("*Remember to attach C:/Users/<yourname> if you're on a Windows Platform.");
 				System.out.print("Enter path: ");
 				String path = console.next();
-				try{
+				try {
 					displayFiles(path);
-				}catch(Exception err){
+				} catch (Exception err) {
 					System.out.println("Could not find that directory");
 				}
 				break;
@@ -115,35 +138,44 @@ public class UserMenu {
 				System.out.println("Woops! that option is not on the menu - try again.");
 				break;
 			}
-		}while(control);
+		} while (control);
 	}
 	
-	public void optionTwo(){
-		boolean control = true;
+	/**
+	 * A submenu for the user menu that handles file decryption
+	 */
+	public void optionTwo() {
 		System.out.println("\nDecrypt a File:");
 		System.out.print("Enter the file path: ");
 		getFile(console.next());
 	}
 	
-	public int userOption(){
+	/**
+	 * A helper function that retrieves users input into the console.
+	 * @return Users input to the console.
+	 */
+	public int userOption() {
 		int userOption;
-		try{
+		try {
 			userOption = console.nextInt();
 			return userOption;
-		}catch(Exception err){
+		} catch (Exception err) {
 			System.out.println("Woops! Seems like you have not entered a numeric value - try again.");
 			return -1;
 		}
 	}
-
+	
+	/**
+	 * Activates the menu to be used by the runner class.
+	 */
 	public void activateMenu() {
 		boolean control = true;
 
 		displayIntroduction();
-		
+
 		do {
 			displayMenu();
-			
+
 			switch (userOption()) {
 			case 1:
 				optionOne();
@@ -159,7 +191,6 @@ public class UserMenu {
 				System.out.println("Woops! that option is not on the menu - try again.");
 				break;
 			}
-			
 
 		} while (control);
 	}
